@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<PropertyGroup>
+		<Product></Product>
+		<Title>$(Product)</Title>
+		<PackageId></PackageId>
+		<Description></Description>
+		<RepositoryUrl></RepositoryUrl>
+	</PropertyGroup>
+	<PropertyGroup>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    </PropertyGroup>
+	<ItemGroup>
+	  <Folder Include="Assets\" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" />
+    </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+</Project>
