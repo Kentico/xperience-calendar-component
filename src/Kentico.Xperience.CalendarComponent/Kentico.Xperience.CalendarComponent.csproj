@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<Product></Product>
 		<Title>$(Product)</Title>
-		<PackageId></PackageId>
 		<Description></Description>
 		<RepositoryUrl></RepositoryUrl>
 	</PropertyGroup>
@@ -10,12 +9,21 @@
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     </PropertyGroup>
 	<ItemGroup>
-	  <Folder Include="Assets\" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" />
     </ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\" />
+	</ItemGroup>
+	<ItemGroup>
+		<AssemblyAttribute Include="CMS.AssemblyDiscoverableAttribute">
+		</AssemblyAttribute>
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="wwwroot\js\ktc-calendarComponent.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 </Project>

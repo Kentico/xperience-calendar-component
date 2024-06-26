@@ -1,0 +1,7 @@
+﻿@import "~flatpickr/dist/flatpickr.css";
+
+.flatpickr-calendar {
+	z-index: 9999 !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}

@@ -4,7 +4,7 @@
     var markers = {};
     var bounds = new google.maps.LatLngBounds();
     var mapElement = jQuery('div.js-map');
-
+    
     function initialize() {
         geocoder = new google.maps.Geocoder();
         var mapOptions = {

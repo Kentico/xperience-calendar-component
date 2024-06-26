@@ -1,0 +1,36 @@
+@using Kentico.Xperience.CalendarComponent.Components.FormComponents
+@using Kentico.Xperience.CalendarComponent.Components
+@using Kentico.Forms.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model DatePickerFormComponent
+
+@{
+    var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
+    var calendarId = Html.IdFor(m => m.SelectedDate);
+    htmlAttributes["id"] = calendarId;
+    var flatpickrOptions = new
+    {
+        dateFormat = "Y-m-d",
+        altInput = true,
+        altFormat = Model.Properties.DateFormat,
+        defaultDate = new List<string>
+        {
+            Model.SelectedDate
+        },
+        enableTime = !Model.Properties.DateOnly
+    };
+}
+
+@Html.TextBoxFor(m => m.SelectedDate, htmlAttributes)
+
+<script>
+    function initializeFlatpickr() {
+        window.xperience.calendarComponent.initializeFlatpickr("#@calendarId", @Html.Raw(Json.Serialize(flatpickrOptions)));
+    }
+
+    var script = document.createElement('script');
+    script.src = "~/_content/Kentico.Xperience.CalendarComponent/js/ktc-calendarComponent.js";
+    script.onload = initializeFlatpickr;
+    document.head.appendChild(script);
+</script>
