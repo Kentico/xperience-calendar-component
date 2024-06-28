@@ -3,22 +3,26 @@
 @using Kentico.Forms.Web.Mvc
 @using Kentico.Web.Mvc
 
-@model DatePickerFormComponent
+@model CalendarFormComponent
 
 @{
     var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
     var calendarId = Html.IdFor(m => m.SelectedDate);
     htmlAttributes["id"] = calendarId;
+
+    string selectedAltFormat = Model.Properties.DateTimeFormat;
+
     var flatpickrOptions = new
     {
-        dateFormat = "Y-m-d",
+        dateFormat = "m/d/Y h:i:S K",
         altInput = true,
-        altFormat = Model.Properties.DateFormat,
+        altFormat = selectedAltFormat,
         defaultDate = new List<string>
         {
             Model.SelectedDate
         },
-        enableTime = !Model.Properties.DateOnly
+        enableTime = !Model.Properties.DateOnly,
+        minuteIncrement = Model.Properties.TimeInterval
     };
 }
 

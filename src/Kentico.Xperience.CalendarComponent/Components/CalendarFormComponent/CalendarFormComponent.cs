@@ -2,17 +2,17 @@
 using Kentico.Xperience.CalendarComponent.Components.FormComponents;
 
 [assembly: RegisterFormComponent(
-    identifier: DatePickerFormComponent.IDENTIFIER,
-    formComponentType: typeof(DatePickerFormComponent),
+    identifier: CalendarFormComponent.IDENTIFIER,
+    formComponentType: typeof(CalendarFormComponent),
     name: "DatePicker",
     Description = "Pick date from calendar",
-    ViewName = "~/Components/FormComponents/_DatePickerFormComponent.cshtml")]
+    ViewName = "~/Components/CalendarFormComponent/_CalendarFormComponent.cshtml")]
 
 namespace Kentico.Xperience.CalendarComponent.Components.FormComponents;
 
-public class DatePickerFormComponent : FormComponent<DatePickerFormComponentProperties, DateTime>
+public class CalendarFormComponent : FormComponent<CalendarFormComponentProperties, DateTime>
 {
-    public const string IDENTIFIER = nameof(DatePickerFormComponent);
+    public const string IDENTIFIER = nameof(CalendarFormComponent);
 
     [BindableProperty]
     public string SelectedDate { get; set; } = "";
