@@ -1,5 +1,6 @@
 ﻿using CMS.Helpers;
 
+using DancingGoat.CalendarData;
 using DancingGoat.Helpers;
 using DancingGoat.PageTemplates;
 
@@ -14,6 +15,7 @@ using Kentico.OnlineMarketing.Web.Mvc;
 using Kentico.PageBuilder.Web.Mvc;
 using Kentico.Scheduler.Web.Mvc;
 using Kentico.Web.Mvc;
+using Kentico.Xperience.CalendarComponent;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization.Routing;
@@ -103,6 +105,10 @@ namespace DancingGoat
                 options.JQueryCustomBundleWebRootPath = "Scripts/jquery-3.5.1.min.js";
                 options.JQueryUnobtrusiveAjaxCustomBundleWebRootPath = "Scripts/jquery.unobtrusive-ajax.min.js";
             });
+
+            services.AddKenticoCalendarComponent(builder =>
+                builder.RegisterDataProvider<DancingGoatCalendarDataProvider>(nameof(DancingGoatCalendarDataProvider))
+            );
 
             ConfigureMembershipServices(services);
             ConfigurePageBuilderFilters();

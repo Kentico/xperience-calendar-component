@@ -18,9 +18,9 @@
         altInput = true,
         altFormat = selectedAltFormat,
         defaultDate = new List<string>
-        {
-            Model.SelectedDate
-        },
+                {
+                    Model.SelectedDate
+                },
         enableTime = !Model.Properties.DateOnly,
         minuteIncrement = Model.Properties.TimeInterval
     };
@@ -29,7 +29,27 @@
 @Html.TextBoxFor(m => m.SelectedDate, htmlAttributes)
 
 <script>
-    function initializeFlatpickr() {
+    async function fetchExcludedDateTimeData(dataProviderName) {
+        try {
+            let response = await fetch(`/kentico.calendarComponent/GetExcludedDateTimeData?dataProviderName=${encodeURIComponent(dataProviderName)}`);
+            if (response.ok) {
+                let data = await response.json();
+                return data;
+            } else {
+                throw new Error('Failed to fetch data');
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return [];
+        }
+    }
+
+    async function initializeFlatpickr() {
+        let excludedDateTimeData = await fetchExcludedDateTimeData('@Model.Properties.ExcludedDateTimeDataProvider');
+
+        let flatpickrOptions = @Html.Raw(Json.Serialize(flatpickrOptions));
+        flatpickrOptions.disable = excludedDateTimeData;
+
         window.xperience.calendarComponent.initializeFlatpickr("#@calendarId", @Html.Raw(Json.Serialize(flatpickrOptions)));
     }
 
