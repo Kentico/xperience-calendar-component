@@ -18,7 +18,7 @@ public static class CalendarComponentStartipExtensions
 
 public interface ICalendarComponentBuilder
 {
-    ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : class, ICalendarDataProvider;
+    ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : DefaultCalendarDataProvider;
 }
 
 internal class CalendarComponentBuilder : ICalendarComponentBuilder
@@ -27,7 +27,7 @@ internal class CalendarComponentBuilder : ICalendarComponentBuilder
 
     public CalendarComponentBuilder(IServiceCollection serviceCollection) => this.serviceCollection = serviceCollection;
 
-    public ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : class, ICalendarDataProvider
+    public ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : DefaultCalendarDataProvider
     {
         CalendarProviderStorage.AddCalendarDataProvider<TDataProvider>(providerName);
         serviceCollection.AddTransient<TDataProvider>();

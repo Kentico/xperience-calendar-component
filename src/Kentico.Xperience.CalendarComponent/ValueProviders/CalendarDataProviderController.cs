@@ -16,7 +16,7 @@ public sealed class CalendarDataProviderController : Controller
     {
         if (dataProviderName is null or CalendarFormComponentProperties.NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER)
         {
-            return Json(new List<DateTime>());
+            return Json(new CalendarDataDto());
         }
 
         var dataProviderType = CalendarProviderStorage.Providers[dataProviderName];
@@ -33,6 +33,29 @@ public sealed class CalendarDataProviderController : Controller
             throw new InvalidDataException($"Specified provider \"{dataProviderType}\" does not exist.");
         }
 
-        return Json(await dataProvider.GetUnavailableValues());
+        var excludedDates = (await dataProvider.GetUnavailableDates()).Select(x => x.ToString()).ToList();
+        var excludedTimeFrames = (await dataProvider.GetUnavailableTimeFrames()).Select(x => x.ToString()).ToList();
+
+        var result = new CalendarDataDto(excludedTimeFrames, excludedDates);
+
+        return Json(result);
+    }
+}
+
+public class CalendarDataDto
+{
+    public List<string> ExcludedTimeFrames { get; set; }
+    public List<string> ExcludedDates { get; set; }
+
+    public CalendarDataDto()
+    {
+        ExcludedTimeFrames = new List<string>();
+        ExcludedDates = new List<string>();
+    }
+
+    public CalendarDataDto(List<string> excludedTimeFrames, List<string> excludedDates)
+    {
+        ExcludedTimeFrames = excludedTimeFrames;
+        ExcludedDates = excludedDates;
     }
 }

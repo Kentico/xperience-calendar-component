@@ -56,8 +56,10 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
 public class DateTimeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
 {
     private readonly List<string> commonTimeFormats = new() { "H:i", "h:i" };
-    private readonly List<string> commonDateTimeFormats = new() { "d.m.Y", "m.d.Y", "m/d/Y", "d/m/Y", "d.m.y", "m.d.y", "m/d/y", "d/m/y"
-        ,"y.m.d", "y.d.m", "y/m/d", "y/d/m", "Y.m.d", "Y.d.m", "Y/m/d", "Y/d/m"
+    private readonly List<string> commonDateTimeFormats = new() {
+        "d.m.Y", "m.d.Y", "m/d/Y", "d/m/Y", "d.m.y", "m.d.y", "m/d/y", "d/m/y"
+        ,"y.m.d", "y.d.m", "y/m/d", "y/d/m", "Y.m.d", "Y.d.m", "Y/m/d", "Y/d/m",
+        "d-m-Y", "d-m-y", "m-d-Y", "m-d-y", "y-m-d", "Y-m-d", "y-d-m", "Y-d-m"
     };
 
     public override void Configure(DropDownComponent formComponent, IFormFieldValueProvider formFieldValueProvider)

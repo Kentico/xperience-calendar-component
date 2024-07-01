@@ -2,15 +2,24 @@
 
 namespace DancingGoat.CalendarData
 {
-    public class DancingGoatCalendarDataProvider : ICalendarDataProvider
+    public class DancingGoatCalendarDataProvider : DefaultCalendarDataProvider
     {
-        public async Task<IEnumerable<DateTime>> GetUnavailableValues() => await Task.FromResult(
-            new List<DateTime> {
+        public override async Task<IEnumerable<DateOnly>> GetUnavailableDates() => await Task.FromResult(
+            new List<DateOnly> {
+                DateOnly.FromDateTime(DateTime.Now.AddDays(1)),
+                DateOnly.FromDateTime(DateTime.Now.AddDays(-1)),
+                DateOnly.FromDateTime(DateTime.Now.AddDays(3)),
+                DateOnly.FromDateTime(DateTime.Now.AddDays(5))
+            });
+
+        public override async Task<IEnumerable<DateTime>> GetUnavailableTimeFrames() => await Task.FromResult(
+            new List<DateTime>
+            {
                 DateTime.Now,
-                DateTime.Now.AddDays(1),
-                DateTime.Now.AddDays(-1),
-                DateTime.Now.AddDays(5),
-                DateTime.Now.AddDays(10)
+                DateTime.Now.AddMinutes(60),
+                DateTime.Now.AddMinutes(120),
+                DateTime.Now.AddMinutes(-45),
+                DateTime.Now.AddMinutes(-121)
             });
     }
 }
