@@ -1,0 +1,81 @@
+@using Kentico.Xperience.CalendarComponent.Components.FormComponents
+@using Kentico.Xperience.CalendarComponent.Components
+@using Kentico.Forms.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model MultiCalendarFormComponent
+
+@{
+    var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
+    var calendarId = Html.IdFor(m => m.SelectedValue);
+    htmlAttributes["id"] = calendarId;
+
+    List<string> defaultDate = new List<string>();
+    if (!string.IsNullOrEmpty(Model.SelectedValue))
+    {
+        defaultDate = Model.SelectedValue.Split(';').ToList();
+        if (!Model.Properties.IsMulti)
+        {
+            defaultDate = defaultDate.Take(2).ToList();
+        }
+    }
+
+    var flatpickrOptions = new
+    {
+        dateFormat = "m/d/Y",
+        altInput = true,
+        altFormat = Model.Properties.DateFormat,
+        defaultDate = defaultDate,
+        mode = Model.Properties.IsMulti ? "multiple" : "range"
+    };
+}
+
+@Html.TextBoxFor(m => m.SelectedValue, htmlAttributes)
+
+<script>
+    async function fetchExcludedDateTimeData(dataProviderName) {
+        try {
+            let response = await fetch(`/kentico.calendarComponent/GetExcludedDateTimeData?dataProviderName=${encodeURIComponent(dataProviderName)}`);
+            if (response.ok) {
+                let data = await response.json();
+                return data;
+            } else {
+                throw new Error('Failed to fetch data');
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return {
+                excludedDates: [],
+                excludedTimeFrames: []
+            };
+        }
+    }
+
+    function areSameDay(d1, d2) {
+        return d1.getFullYear() === d2.getFullYear() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getDate() === d2.getDate();
+    }
+
+    async function initializeFlatpickr() {
+        let excludedDateTimeData = await fetchExcludedDateTimeData('@Model.Properties.ExcludedDateTimeDataProvider');
+
+        let flatpickrOptions = @Html.Raw(Json.Serialize(flatpickrOptions));
+        let excludedDates = excludedDateTimeData.excludedDates.map((x) => new Date(x));
+
+        flatpickrOptions.disable = [
+            function (date) {
+                return excludedDates.some((x) => areSameDay(x, date));
+            }
+        ];
+
+        window.xperience.calendarComponent.initializeFlatpickr("#@calendarId", flatpickrOptions);
+    }
+
+    var script = document.createElement('script');
+    script.src = "~/_content/Kentico.Xperience.CalendarComponent/js/ktc-calendarComponent.js";
+    script.onload = function () {
+        initializeFlatpickr();
+    };
+    document.head.appendChild(script);
+</script>

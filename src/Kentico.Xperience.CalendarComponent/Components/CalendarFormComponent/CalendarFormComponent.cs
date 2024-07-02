@@ -4,7 +4,7 @@ using Kentico.Xperience.CalendarComponent.Components.FormComponents;
 [assembly: RegisterFormComponent(
     identifier: CalendarFormComponent.IDENTIFIER,
     formComponentType: typeof(CalendarFormComponent),
-    name: "DatePicker",
+    name: "Calendar",
     Description = "Pick date from calendar",
     ViewName = "~/Components/CalendarFormComponent/_CalendarFormComponent.cshtml")]
 

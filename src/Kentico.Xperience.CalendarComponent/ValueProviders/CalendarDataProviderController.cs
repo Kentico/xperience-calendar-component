@@ -36,7 +36,13 @@ public sealed class CalendarDataProviderController : Controller
         var excludedDates = (await dataProvider.GetUnavailableDates()).Select(x => x.ToString()).ToList();
         var excludedTimeFrames = (await dataProvider.GetUnavailableTimeFrames()).Select(x => x.ToString()).ToList();
 
-        var result = new CalendarDataDto(excludedTimeFrames, excludedDates);
+        var result = new CalendarDataDto(excludedTimeFrames, excludedDates)
+        {
+            MinTime = dataProvider.GetMinTime().ToString("hh\\:mm"),
+            MaxTime = dataProvider.GetMaxTime().ToString("hh\\:mm"),
+            MinDate = dataProvider.GetMinDate().ToString(),
+            MaxDate = dataProvider.GetMaxDate().ToString()
+        };
 
         return Json(result);
     }
@@ -46,6 +52,10 @@ public class CalendarDataDto
 {
     public List<string> ExcludedTimeFrames { get; set; }
     public List<string> ExcludedDates { get; set; }
+    public string MinTime { get; set; } = string.Empty;
+    public string MaxTime { get; set; } = string.Empty;
+    public string MinDate { get; set; } = string.Empty;
+    public string MaxDate { get; set; } = string.Empty;
 
     public CalendarDataDto()
     {

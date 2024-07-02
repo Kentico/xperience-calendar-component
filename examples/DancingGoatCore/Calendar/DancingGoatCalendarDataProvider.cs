@@ -21,5 +21,13 @@ namespace DancingGoat.CalendarData
                 DateTime.Now.AddMinutes(-45),
                 DateTime.Now.AddMinutes(-121)
             });
+
+        public override DateOnly GetMinDate() => DateOnly.FromDateTime(DateTime.Now.AddMonths(-1));
+
+        public override DateOnly GetMaxDate() => DateOnly.FromDateTime(DateTime.Now.AddMonths(1));
+
+        public override TimeSpan GetMinTime() => new(hours: 9, minutes: 0, seconds: 0);
+
+        public override TimeSpan GetMaxTime() => new(hours: 17, minutes: 0, seconds: 0);
     }
 }

@@ -31,13 +31,22 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     public int TimeInterval { get; set; }
 
 
+    [EditingComponent(CheckBoxComponent.IDENTIFIER,
+        Label = "Display in 24-Hour format",
+        DefaultValue = false,
+        ExplanationText = "Check for 24-Hour format, uses 12-Hour format by default.",
+        Order = 4)]
+    [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
+    public bool Is24HourFormat { get; set; }
+
+
     [EditingComponent(DropDownComponent.IDENTIFIER,
-        Label = "Date Time Format",
-        DefaultValue = "m.d.Y",
-        ExplanationText = "Select DateTime format",
+        Label = "Date Format",
+        DefaultValue = "M.d.Y",
+        ExplanationText = "Select date format",
         Order = 5)]
     [EditingComponentConfiguration(typeof(DateTimeFormatConfigurator), nameof(DateOnly))]
-    public string DateTimeFormat { get; set; } = string.Empty;
+    public string DateFormat { get; set; } = string.Empty;
 
 
     [EditingComponent(DropDownComponent.IDENTIFIER,
@@ -49,51 +58,20 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
 
 
     [DefaultValueEditingComponent(CalendarFormComponent.IDENTIFIER, Order = 10)]
-    [EditingComponentConfiguration(typeof(DefaultValueConfigurator), nameof(DateTimeFormat))]
+    [EditingComponentConfiguration(typeof(DefaultValueConfigurator), nameof(DateFormat))]
     public override DateTime DefaultValue { get; set; } = DateTime.Now;
 }
 
 public class DateTimeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
 {
-    private readonly List<string> commonTimeFormats = new() { "H:i", "h:i" };
     private readonly List<string> commonDateTimeFormats = new() {
-        "d.m.Y", "m.d.Y", "m/d/Y", "d/m/Y", "d.m.y", "m.d.y", "m/d/y", "d/m/y"
-        ,"y.m.d", "y.d.m", "y/m/d", "y/d/m", "Y.m.d", "Y.d.m", "Y/m/d", "Y/d/m",
-        "d-m-Y", "d-m-y", "m-d-Y", "m-d-y", "y-m-d", "Y-m-d", "y-d-m", "Y-d-m"
+        "d.M.Y", "M.d.Y", "M/d/Y", "d/M/Y", "d.M.y", "M.d.y", "M/d/y", "d/M/y"
+        ,"y.M.d", "y.d.M", "y/M/d", "y/d/M", "Y.M.d", "Y.d.M", "Y/M/d", "Y/d/M",
+        "d-M-Y", "d-M-y", "M-d-Y", "M-d-y", "y-M-d", "Y-M-d", "y-d-M", "Y-d-M"
     };
 
     public override void Configure(DropDownComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
-    {
-        bool dateOnly = IsDateOnly(formFieldValueProvider);
-
-        if (dateOnly)
-        {
-            formComponent.Properties.DataSource = $"{string.Join("\r\n", commonDateTimeFormats)}\r\n{CalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
-        }
-        else
-        {
-            var combinations = new List<string>();
-
-            foreach (string date in commonDateTimeFormats)
-            {
-                foreach (string time in commonTimeFormats)
-                {
-                    combinations.Add($"{date} {time}");
-                }
-            }
-
-            formComponent.Properties.DataSource = $"{string.Join("\r\n", combinations)}\r\n{CalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
-        }
-    }
-    private bool IsDateOnly(IFormFieldValueProvider formFieldValueProvider)
-    {
-        if (formFieldValueProvider.TryGet(DependencyFieldName, out bool dateOnly))
-        {
-            return dateOnly;
-        }
-
-        return false;
-    }
+        => formComponent.Properties.DataSource = $"{string.Join("\r\n", commonDateTimeFormats)}\r\n{CalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
 }
 
 public class DefaultValueConfigurator : FormComponentConfigurator<CalendarFormComponent>
@@ -101,12 +79,16 @@ public class DefaultValueConfigurator : FormComponentConfigurator<CalendarFormCo
     public override void Configure(CalendarFormComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
     {
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DateOnly), out bool dateOnly);
-        formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DateTimeFormat), out string dateTimeFormat);
+        formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DateFormat), out string dateTimeFormat);
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.TimeInterval), out int timeInterval);
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.ExcludedDateTimeDataProvider), out string dateTimeDataProvider);
+        formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.Is24HourFormat), out bool is24HourFormat);
+        formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DefaultValue), out DateTime defaultValue);
 
         formComponent.Properties.DateOnly = dateOnly;
-        formComponent.Properties.DateTimeFormat = dateTimeFormat;
+        formComponent.Properties.DefaultValue = defaultValue;
+        formComponent.Properties.Is24HourFormat = is24HourFormat;
+        formComponent.Properties.DateFormat = dateTimeFormat;
         formComponent.Properties.TimeInterval = timeInterval;
         formComponent.Properties.ExcludedDateTimeDataProvider = dateTimeDataProvider;
     }

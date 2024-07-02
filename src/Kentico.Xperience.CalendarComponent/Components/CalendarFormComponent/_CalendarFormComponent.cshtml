@@ -10,19 +10,31 @@
     var calendarId = Html.IdFor(m => m.SelectedDate);
     htmlAttributes["id"] = calendarId;
 
-    string selectedAltFormat = Model.Properties.DateTimeFormat;
+    string altFormat = Model.Properties.DateFormat.Replace('M', 'm');
+    if (!Model.Properties.DateOnly)
+    {
+        if (Model.Properties.Is24HourFormat)
+        {
+            altFormat += " H:i";
+        }
+        else
+        {
+            altFormat += " G:i K";
+        }
+    }
 
     var flatpickrOptions = new
     {
         dateFormat = "m/d/Y h:i:S K",
         altInput = true,
-        altFormat = selectedAltFormat,
+        altFormat = altFormat,
         defaultDate = new List<string>
-                {
-                    Model.SelectedDate
-                },
+        {
+            Model.SelectedDate
+        },
         enableTime = !Model.Properties.DateOnly,
-        minuteIncrement = Model.Properties.TimeInterval
+        minuteIncrement = Model.Properties.TimeInterval,
+        time_24hr = Model.Properties.Is24HourFormat
     };
 }
 
@@ -86,7 +98,6 @@
                 adjustedDate.setMinutes(adjustedDate.getMinutes() - instance.config.minuteIncrement);
             }
             else { 
-                console.log("adjusted " + adjustedDate + " > last selected " + last);
                 adjustedDate.setMinutes(adjustedDate.getMinutes() + instance.config.minuteIncrement);
             }
             
@@ -104,6 +115,10 @@
         let flatpickrOptions = @Html.Raw(Json.Serialize(flatpickrOptions));
 
         flatpickrOptions.disable = excludedDateTimeData.excludedDates.map((x) => new Date(x));
+        flatpickrOptions.minTime = excludedDateTimeData.minTime;
+        flatpickrOptions.maxTime = excludedDateTimeData.maxTime;
+        flatpickrOptions.minDate = excludedDateTimeData.minDate;
+        flatpickrOptions.maxDate = excludedDateTimeData.maxDate;
 
         let disabledDateTimes = excludedDateTimeData.excludedTimeFrames.map((x) => new Date(x));
         let onChange = [];
