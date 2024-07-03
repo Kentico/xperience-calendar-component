@@ -45,7 +45,7 @@ public interface ICalendarDataProvider
 /// <summary>
 /// Default data provider just implements the methods but does not change the data.
 /// </summary>
-public abstract class DefaultCalendarDataProvider : ICalendarDataProvider
+public abstract class AbstractCalendarDataProvider : ICalendarDataProvider
 {
     /// <inheritdoc />
     public virtual async Task<IEnumerable<DateOnly>> GetUnavailableDates() => await Task.FromResult(new List<DateOnly>());

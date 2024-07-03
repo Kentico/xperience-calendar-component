@@ -1,7 +1,6 @@
 ﻿using CMS.DataEngine;
 
 using Kentico.Forms.Web.Mvc;
-using Kentico.Xperience.CalendarComponent.ValueProviders;
 
 namespace Kentico.Xperience.CalendarComponent.Components;
 
@@ -10,11 +9,6 @@ namespace Kentico.Xperience.CalendarComponent.Components;
 /// </summary>
 public class MultiCalendarFormComponentProperties : FormComponentProperties<string>
 {
-    /// <summary>
-    /// Identifier of the custom date format.
-    /// </summary>
-    internal const string CUSTOM_FORMAT_IDENTIFIER = "Custom";
-
     /// <summary>
     /// Identifier of no dynamic data provider.
     /// </summary>
@@ -45,7 +39,7 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
         DefaultValue = "m.d.Y",
         ExplanationText = "Select Date format",
         Order = 5)]
-    [EditingComponentConfiguration(typeof(DateTimeRangeFormatConfigurator))]
+    [EditingComponentConfiguration(typeof(DateFormatConfigurator))]
     public string DateFormat { get; set; } = string.Empty;
 
     /// <summary>
@@ -55,47 +49,13 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
         Label = "Excluded Date Time Data Provider",
         DefaultValue = NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER,
         ExplanationText = "Select a provider for excluded dates. Choose \"None\" for no provider.")]
-    [EditingComponentConfiguration(typeof(ExcludedRangeDateTimeProviderConfigurator))]
+    [EditingComponentConfiguration(typeof(MultiCalendarExcludedDateTimeDataProviderConfigurator))]
     public string ExcludedDateTimeDataProvider { get; set; } = string.Empty;
 
     /// <summary>
     /// Sets the default value for calendar component.
     /// </summary>
     [DefaultValueEditingComponent(MultiCalendarFormComponent.IDENTIFIER, Order = 10)]
-    [EditingComponentConfiguration(typeof(DefaultRangeValueConfigurator), nameof(DateFormat))]
+    [EditingComponentConfiguration(typeof(MultiCalendarDefaultValueConfigurator), nameof(DateFormat))]
     public override string DefaultValue { get; set; } = string.Empty;
-}
-
-internal class DateTimeRangeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
-{
-    private readonly List<string> commonDateTimeFormats = new() {
-        "d.m.Y", "m.d.Y", "m/d/Y", "d/m/Y", "d.m.y", "m.d.y", "m/d/y", "d/m/y"
-        ,"y.m.d", "y.d.m", "y/m/d", "y/d/m", "Y.m.d", "Y.d.m", "Y/m/d", "Y/d/m",
-        "d-m-Y", "d-m-y", "m-d-Y", "m-d-y", "y-m-d", "Y-m-d", "y-d-m", "Y-d-m"
-    };
-
-    public override void Configure(DropDownComponent formComponent, IFormFieldValueProvider formFieldValueProvider) =>
-        formComponent.Properties.DataSource = $"{string.Join("\r\n", commonDateTimeFormats)}\r\n{MultiCalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
-}
-
-internal class DefaultRangeValueConfigurator : FormComponentConfigurator<MultiCalendarFormComponent>
-{
-    public override void Configure(MultiCalendarFormComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
-    {
-        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.DateFormat), out string dateTimeFormat);
-        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.ExcludedDateTimeDataProvider), out string dateTimeDataProvider);
-        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.IsMulti), out bool isMulti);
-        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.DefaultValue), out string defaultValue);
-
-        formComponent.Properties.DateFormat = dateTimeFormat;
-        formComponent.Properties.DefaultValue = defaultValue;
-        formComponent.Properties.IsMulti = isMulti;
-        formComponent.Properties.ExcludedDateTimeDataProvider = dateTimeDataProvider;
-    }
-}
-
-internal class ExcludedRangeDateTimeProviderConfigurator : FormComponentConfigurator<DropDownComponent>
-{
-    public override void Configure(DropDownComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
-        => formComponent.Properties.DataSource = $"{string.Join("\r\n", CalendarProviderStorage.Providers.Keys)}\r\n{MultiCalendarFormComponentProperties.NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER}";
 }

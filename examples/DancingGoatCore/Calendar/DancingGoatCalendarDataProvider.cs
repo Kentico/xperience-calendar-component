@@ -2,7 +2,7 @@
 
 namespace DancingGoat.CalendarData;
 
-public class DancingGoatCalendarDataProvider : DefaultCalendarDataProvider
+public class DancingGoatCalendarDataProvider : AbstractCalendarDataProvider
 {
     public override async Task<IEnumerable<DateOnly>> GetUnavailableDates() => await Task.FromResult(
         new List<DateOnly> {

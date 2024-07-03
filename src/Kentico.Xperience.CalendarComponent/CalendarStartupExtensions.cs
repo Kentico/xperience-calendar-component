@@ -29,13 +29,13 @@ public interface ICalendarComponentBuilder
     /// <summary>
     /// Registers the given <typeparamref name="TDataProvider" /> as a transient service under <paramref name="providerName" />
     /// </summary>
-    /// <typeparam name="TDataProvider">The custom type of <see cref="DefaultCalendarDataProvider"/> </typeparam>
+    /// <typeparam name="TDataProvider">The custom type of <see cref="AbstractCalendarDataProvider"/> </typeparam>
     /// <param name="providerName">Used internally with <typeparamref name="TDataProvider" /> to enable dynamic assignment of calendar data providers. Names must be unique.</param>
     /// <exception cref="ArgumentException">
     ///     Thrown if a provider has already been registered with the given <paramref name="providerName"/>
     /// </exception>
     /// <returns></returns>
-    ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : DefaultCalendarDataProvider;
+    ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : AbstractCalendarDataProvider;
 }
 
 internal class CalendarComponentBuilder : ICalendarComponentBuilder
@@ -44,7 +44,7 @@ internal class CalendarComponentBuilder : ICalendarComponentBuilder
 
     public CalendarComponentBuilder(IServiceCollection serviceCollection) => this.serviceCollection = serviceCollection;
 
-    public ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : DefaultCalendarDataProvider
+    public ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : AbstractCalendarDataProvider
     {
         CalendarProviderStorage.AddCalendarDataProvider<TDataProvider>(providerName);
         serviceCollection.AddTransient<TDataProvider>();

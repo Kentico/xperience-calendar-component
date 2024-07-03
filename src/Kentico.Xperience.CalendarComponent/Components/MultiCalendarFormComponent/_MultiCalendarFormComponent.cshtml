@@ -62,9 +62,19 @@
         let flatpickrOptions = @Html.Raw(Json.Serialize(flatpickrOptions));
         let excludedDates = excludedDateTimeData.excludedDates.map((x) => new Date(x));
 
+        let minDate = new Date(excludedDateTimeData.minDate);
+        let maxDate = new Date(excludedDateTimeData.maxDate);
+        let datee = new Date("20/11/2024");
+        console.log(minDate); 
+        console.log(maxDate);
+        console.log(datee);
+        console.log(datee < minDate);
+        console.log(datee > maxDate);
+
+
         flatpickrOptions.disable = [
             function (date) {
-                return excludedDates.some((x) => areSameDay(x, date));
+                return excludedDates.some((x) => areSameDay(x, date)) || date < minDate || date > maxDate;
             }
         ];
 

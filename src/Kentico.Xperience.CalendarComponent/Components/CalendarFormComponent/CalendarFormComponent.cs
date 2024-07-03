@@ -6,6 +6,7 @@ using Kentico.Xperience.CalendarComponent.Components;
     formComponentType: typeof(CalendarFormComponent),
     name: "Calendar",
     Description = "Pick date from calendar",
+    IconClass = "icon-calendar",
     ViewName = "~/Components/CalendarFormComponent/_CalendarFormComponent.cshtml")]
 
 namespace Kentico.Xperience.CalendarComponent.Components;
