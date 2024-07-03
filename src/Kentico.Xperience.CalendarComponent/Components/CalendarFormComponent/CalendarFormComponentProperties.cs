@@ -3,17 +3,33 @@
 using Kentico.Forms.Web.Mvc;
 using Kentico.Xperience.CalendarComponent.ValueProviders;
 
-namespace Kentico.Xperience.CalendarComponent.Components.FormComponents;
+namespace Kentico.Xperience.CalendarComponent.Components;
 
+/// <summary>
+/// The properties to be set in the Kentico administration to configure the calendar form component.
+/// </summary>
 public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
 {
-    public const string CUSTOM_FORMAT_IDENTIFIER = "Custom";
-    public const string NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER = "None";
+    /// <summary>
+    /// Identifier of the custom date format.
+    /// </summary>
+    internal const string CUSTOM_FORMAT_IDENTIFIER = "Custom";
 
+    /// <summary>
+    /// Identifier of no dynamic data provider.
+    /// </summary>
+    internal const string NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER = "None";
+
+    /// <summary>
+    /// Initializes a new instance of Kentico.Xperience.CalendarComponent.Components.CalendarFormComponentProperties
+    /// </summary>
     public CalendarFormComponentProperties() : base(FieldDataType.DateTime)
     {
     }
 
+    /// <summary>
+    /// Configures the calendar component to use date or date and time format.
+    /// </summary>
     [EditingComponent(CheckBoxComponent.IDENTIFIER,
         Label = "Show Date Only",
         DefaultValue = false,
@@ -21,7 +37,9 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
         Order = 2)]
     public bool DateOnly { get; set; }
 
-
+    /// <summary>
+    /// Configures the length of a time frame.
+    /// </summary>
     [EditingComponent(IntInputComponent.IDENTIFIER,
         Label = "Time Frame",
         DefaultValue = 15,
@@ -30,7 +48,9 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
     public int TimeInterval { get; set; }
 
-
+    /// <summary>
+    /// Configures whether the time is displayed in 24-hour or 12-hour AM/PM day format.
+    /// </summary>
     [EditingComponent(CheckBoxComponent.IDENTIFIER,
         Label = "Display in 24-Hour format",
         DefaultValue = false,
@@ -39,7 +59,9 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
     public bool Is24HourFormat { get; set; }
 
-
+    /// <summary>
+    /// Configures displayed date format.
+    /// </summary>
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Date Format",
         DefaultValue = "M.d.Y",
@@ -48,7 +70,9 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [EditingComponentConfiguration(typeof(DateTimeFormatConfigurator), nameof(DateOnly))]
     public string DateFormat { get; set; } = string.Empty;
 
-
+    /// <summary>
+    /// Configures the dynamic calendar data provider.
+    /// </summary>
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Excluded Date Time Data Provider",
         DefaultValue = NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER,
@@ -56,13 +80,15 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [EditingComponentConfiguration(typeof(ExcludedDateTimeProviderConfigurator))]
     public string ExcludedDateTimeDataProvider { get; set; } = string.Empty;
 
-
+    /// <summary>
+    /// Sets the default value for calendar component.
+    /// </summary>
     [DefaultValueEditingComponent(CalendarFormComponent.IDENTIFIER, Order = 10)]
     [EditingComponentConfiguration(typeof(DefaultValueConfigurator), nameof(DateFormat))]
     public override DateTime DefaultValue { get; set; } = DateTime.Now;
 }
 
-public class DateTimeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
+internal class DateTimeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
 {
     private readonly List<string> commonDateTimeFormats = new() {
         "d.M.Y", "M.d.Y", "M/d/Y", "d/M/Y", "d.M.y", "M.d.y", "M/d/y", "d/M/y"
@@ -74,7 +100,7 @@ public class DateTimeFormatConfigurator : FormComponentConfigurator<DropDownComp
         => formComponent.Properties.DataSource = $"{string.Join("\r\n", commonDateTimeFormats)}\r\n{CalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
 }
 
-public class DefaultValueConfigurator : FormComponentConfigurator<CalendarFormComponent>
+internal class DefaultValueConfigurator : FormComponentConfigurator<CalendarFormComponent>
 {
     public override void Configure(CalendarFormComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
     {

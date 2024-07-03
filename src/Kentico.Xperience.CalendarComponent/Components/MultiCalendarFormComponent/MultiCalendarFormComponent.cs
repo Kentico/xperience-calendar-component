@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 using Kentico.Forms.Web.Mvc;
-using Kentico.Xperience.CalendarComponent.Components.FormComponents;
+using Kentico.Xperience.CalendarComponent.Components;
 
 [assembly: RegisterFormComponent(
     identifier: MultiCalendarFormComponent.IDENTIFIER,
@@ -10,19 +10,31 @@ using Kentico.Xperience.CalendarComponent.Components.FormComponents;
     Description = "Pick date range from calendar",
     ViewName = "~/Components/MultiCalendarFormComponent/_MultiCalendarFormComponent.cshtml")]
 
-namespace Kentico.Xperience.CalendarComponent.Components.FormComponents;
+namespace Kentico.Xperience.CalendarComponent.Components;
 
+/// <summary>
+/// Class which constructs the Calendar Form Component with multiple selectable days or a range of dates.
+/// </summary>
 public class MultiCalendarFormComponent : FormComponent<MultiCalendarFormComponentProperties, string>
 {
+    /// <summary>
+    /// The internal identifier of this component.
+    /// </summary>
     public const string IDENTIFIER = nameof(MultiCalendarFormComponent);
 
+    /// <summary>
+    /// Selected value in the form component. Later processed and saved in the database.
+    /// </summary>
     [BindableProperty]
     public string SelectedValue { get; set; } = string.Empty;
 
+    /// <inheritdoc />
     public override bool CustomAutopostHandling => true;
 
+    /// <inheritdoc />
     public override string GetValue() => SelectedValue;
 
+    /// <inheritdoc />
     public override void SetValue(string value)
     {
         if (string.IsNullOrEmpty(value))

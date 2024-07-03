@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using Kentico.Xperience.CalendarComponent.Components.FormComponents;
+using Kentico.Xperience.CalendarComponent.Components;
 
 namespace Kentico.Xperience.CalendarComponent.ValueProviders;
 
@@ -11,6 +11,12 @@ public sealed class CalendarDataProviderController : Controller
     private readonly IServiceProvider serviceProvider;
     public CalendarDataProviderController(IServiceProvider serviceProvider) => this.serviceProvider = serviceProvider;
 
+    /// <summary>
+    /// Returns data from dynamic data provider for a given calendar form component.
+    /// </summary>
+    /// <param name="dataProviderName">name of the provider</param>
+    /// <returns></returns>
+    /// <exception cref="InvalidDataException"></exception>
     [HttpGet]
     public async Task<IActionResult> GetExcludedDateTimeData(string dataProviderName)
     {
@@ -48,7 +54,7 @@ public sealed class CalendarDataProviderController : Controller
     }
 }
 
-public class CalendarDataDto
+internal class CalendarDataDto
 {
     public List<string> ExcludedTimeFrames { get; set; }
     public List<string> ExcludedDates { get; set; }

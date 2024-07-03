@@ -3,17 +3,33 @@
 using Kentico.Forms.Web.Mvc;
 using Kentico.Xperience.CalendarComponent.ValueProviders;
 
-namespace Kentico.Xperience.CalendarComponent.Components.FormComponents;
+namespace Kentico.Xperience.CalendarComponent.Components;
 
+/// <summary>
+/// The properties to be set in the Kentico administration to configure the calendar multi-value form component.
+/// </summary>
 public class MultiCalendarFormComponentProperties : FormComponentProperties<string>
 {
-    public const string CUSTOM_FORMAT_IDENTIFIER = "Custom";
-    public const string NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER = "None";
+    /// <summary>
+    /// Identifier of the custom date format.
+    /// </summary>
+    internal const string CUSTOM_FORMAT_IDENTIFIER = "Custom";
 
+    /// <summary>
+    /// Identifier of no dynamic data provider.
+    /// </summary>
+    internal const string NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER = "None";
+
+    /// <summary>
+    /// Initializes a new instance of Kentico.Xperience.CalendarComponent.Components.MultiCalendarFormComponentProperties
+    /// </summary>
     public MultiCalendarFormComponentProperties() : base(FieldDataType.Text, size: 200)
     {
     }
 
+    /// <summary>
+    /// Configures whether the component should set multiple dates or a range of dates.
+    /// </summary>
     [EditingComponent(CheckBoxComponent.IDENTIFIER,
         Label = "Is multi date selection",
         DefaultValue = false,
@@ -21,7 +37,9 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
         Order = 1)]
     public bool IsMulti { get; set; }
 
-
+    /// <summary>
+    /// Configures displayed date format.
+    /// </summary>
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Date Format",
         DefaultValue = "m.d.Y",
@@ -30,7 +48,9 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
     [EditingComponentConfiguration(typeof(DateTimeRangeFormatConfigurator))]
     public string DateFormat { get; set; } = string.Empty;
 
-
+    /// <summary>
+    /// Configures the dynamic calendar data provider.
+    /// </summary>
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Excluded Date Time Data Provider",
         DefaultValue = NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER,
@@ -38,13 +58,15 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
     [EditingComponentConfiguration(typeof(ExcludedRangeDateTimeProviderConfigurator))]
     public string ExcludedDateTimeDataProvider { get; set; } = string.Empty;
 
-
+    /// <summary>
+    /// Sets the default value for calendar component.
+    /// </summary>
     [DefaultValueEditingComponent(MultiCalendarFormComponent.IDENTIFIER, Order = 10)]
     [EditingComponentConfiguration(typeof(DefaultRangeValueConfigurator), nameof(DateFormat))]
     public override string DefaultValue { get; set; } = string.Empty;
 }
 
-public class DateTimeRangeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
+internal class DateTimeRangeFormatConfigurator : FormComponentConfigurator<DropDownComponent>
 {
     private readonly List<string> commonDateTimeFormats = new() {
         "d.m.Y", "m.d.Y", "m/d/Y", "d/m/Y", "d.m.y", "m.d.y", "m/d/y", "d/m/y"
@@ -56,7 +78,7 @@ public class DateTimeRangeFormatConfigurator : FormComponentConfigurator<DropDow
         formComponent.Properties.DataSource = $"{string.Join("\r\n", commonDateTimeFormats)}\r\n{MultiCalendarFormComponentProperties.CUSTOM_FORMAT_IDENTIFIER}";
 }
 
-public class DefaultRangeValueConfigurator : FormComponentConfigurator<MultiCalendarFormComponent>
+internal class DefaultRangeValueConfigurator : FormComponentConfigurator<MultiCalendarFormComponent>
 {
     public override void Configure(MultiCalendarFormComponent formComponent, IFormFieldValueProvider formFieldValueProvider)
     {
