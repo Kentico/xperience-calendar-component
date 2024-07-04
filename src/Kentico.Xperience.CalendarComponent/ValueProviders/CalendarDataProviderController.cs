@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Kentico.Xperience.CalendarComponent.Components;
 
-using Kentico.Xperience.CalendarComponent.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kentico.Xperience.CalendarComponent.ValueProviders;
 
@@ -32,12 +32,7 @@ public sealed class CalendarDataProviderController : Controller
             throw new InvalidDataException($"Specified provider \"{dataProviderType}\" does not exist.");
         }
 
-        var dataProvider = serviceProvider.GetRequiredCalendarDataProvider(dataProviderType);
-
-        if (dataProvider is null)
-        {
-            throw new InvalidDataException($"Specified provider \"{dataProviderType}\" does not exist.");
-        }
+        var dataProvider = serviceProvider.GetRequiredCalendarDataProvider(dataProviderType) ?? throw new InvalidDataException($"Specified provider \"{dataProviderType}\" does not exist.");
 
         var excludedDates = (await dataProvider.GetUnavailableDates()).Select(x => x.ToString()).ToList();
         var excludedTimeFrames = (await dataProvider.GetUnavailableTimeFrames()).Select(x => x.ToString()).ToList();
