@@ -31,7 +31,7 @@ public class CalendarFormComponent : FormComponent<CalendarFormComponentProperti
     public override bool CustomAutopostHandling => true;
 
     /// <inheritdoc />
-    public override DateTime GetValue() => DateTime.Parse(SelectedDate);
+    public override DateTime GetValue() => DateTime.Parse(SelectedDate, default);
 
     /// <inheritdoc />
     public override void SetValue(DateTime value) => SelectedDate = value.ToString();

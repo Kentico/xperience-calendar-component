@@ -63,7 +63,7 @@ public class MultiCalendarFormComponent : FormComponent<MultiCalendarFormCompone
             tokens = value.Split(separator, StringSplitOptions.TrimEntries);
         }
 
-        if (DateOnly.TryParse(tokens[0], out var firstDate))
+        if (DateOnly.TryParse(tokens[0], default, System.Globalization.DateTimeStyles.None, out var firstDate))
         {
             stringBuilder.Append(firstDate);
         }
@@ -74,7 +74,7 @@ public class MultiCalendarFormComponent : FormComponent<MultiCalendarFormCompone
 
         for (int i = 1; i < tokens.Length; i++)
         {
-            if (DateOnly.TryParse(tokens[i], out var dateOnly))
+            if (DateOnly.TryParse(tokens[i], default, System.Globalization.DateTimeStyles.None, out var dateOnly))
             {
                 stringBuilder.Append(';');
                 stringBuilder.Append(dateOnly);
