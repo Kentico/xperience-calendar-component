@@ -8,9 +8,9 @@ Calendar form component integration enabling to add a calendar form component. T
 
 ## Screenshots
 
-![Form builder UI calendar form component configuration](/images/calendar-component-form-builder.png)
-![Calendar single value form component configuration](/images/calendar-component-single-value.png)
-![Calendar multi value form component configuration](/images/calendar-component-multi-value.png)
+![Form builder UI calendar form component configuration](./images/calendar-component-form-builder.png)
+![Calendar single value form component configuration](./images/calendar-component-single-value.png)
+![Calendar multi value form component configuration](./images/calendar-component-multi-value.png)
 
 ## Library Version Matrix
 

@@ -1,6 +1,6 @@
 # Configure a multi value Calendar form component
 
-![Component](/images/calendar-component-multi-value.png)
+![Component](../images/calendar-component-multi-value.png)
 
 The following properties are configurable in the kentico form builder:
 1. Is multi date selection - Configures the calendar component to allow for range selection or multiple dates.
