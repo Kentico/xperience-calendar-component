@@ -23,7 +23,7 @@
     {
         dateFormat = "m/d/Y",
         altInput = true,
-        altFormat = Model.Properties.DateFormat,
+        altFormat = Model.Properties.DateFormat.Replace('M', 'm'),
         defaultDate = defaultDate,
         mode = Model.Properties.IsMulti ? "multiple" : "range"
     };
