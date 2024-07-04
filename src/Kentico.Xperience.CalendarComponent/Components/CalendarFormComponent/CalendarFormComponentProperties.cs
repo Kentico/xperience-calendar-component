@@ -80,4 +80,18 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [DefaultValueEditingComponent(CalendarFormComponent.IDENTIFIER, Order = 10)]
     [EditingComponentConfiguration(typeof(CalendarDefaultValueConfigurator), nameof(DateFormat))]
     public override DateTime DefaultValue { get; set; } = DateTime.Now;
+
+    /// <summary>
+    /// Configures whether the value should be automatically shown in the client's time zone. If true,
+    /// offset is added to the selected time according to user's time zone.
+    /// Time is always saved in the server's time zone.
+    /// Only Date Time uses the offset. Date only does not convert.
+    /// </summary>
+    [EditingComponent(CheckBoxComponent.IDENTIFIER,
+        Order = 11,
+        Label = "Display time in client's time zone",
+        DefaultValue = true,
+        ExplanationText = "Configures whether the value should be automatically shown in the client's time zone. If true, offset is added to the selected time according to user's time zone. Time is always saved in the server's time zone.")]
+    [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
+    public bool DisplayTimeInClientTimeZone { get; set; }
 }

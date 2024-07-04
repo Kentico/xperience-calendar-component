@@ -27,12 +27,33 @@ public class CalendarFormComponent : FormComponent<CalendarFormComponentProperti
     [BindableProperty]
     public string SelectedDate { get; set; } = "";
 
+    /// <summary>
+    /// Sets time zone of the client.
+    /// </summary>
+    [BindableProperty]
+    public string ClientOffsetToUtc { get; set; } = string.Empty;
+
     /// <inheritdoc />
     public override bool CustomAutopostHandling => true;
 
     /// <inheritdoc />
-    public override DateTime GetValue() => DateTime.Parse(SelectedDate, default);
+    public override DateTime GetValue()
+    {
+        var result = DateTime.Parse(SelectedDate, default);
+        if (int.TryParse(ClientOffsetToUtc, out int jsUtcOffset))
+        {
+            var currentTimeZoneOffset = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow);
+
+            int clientUtcOffset = -1 * jsUtcOffset;
+            int jsHourUtcOffset = clientUtcOffset / 60;
+            int difference = currentTimeZoneOffset.Hours - jsHourUtcOffset;
+
+            return result.AddHours(difference);
+        }
+        return result;
+    }
 
     /// <inheritdoc />
-    public override void SetValue(DateTime value) => SelectedDate = value.ToString();
+    public override void SetValue(DateTime value) =>
+            SelectedDate = value.ToString("MM/dd/yyyy HH:mm:ss zzz");
 }

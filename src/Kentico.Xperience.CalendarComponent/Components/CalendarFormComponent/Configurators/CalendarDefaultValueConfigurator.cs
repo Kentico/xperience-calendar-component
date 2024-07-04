@@ -12,8 +12,10 @@ internal class CalendarDefaultValueConfigurator : FormComponentConfigurator<Cale
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.ExcludedDateTimeDataProvider), out string dateTimeDataProvider);
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.Is24HourFormat), out bool is24HourFormat);
         formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DefaultValue), out DateTime defaultValue);
+        formFieldValueProvider.TryGet(nameof(CalendarFormComponentProperties.DisplayTimeInClientTimeZone), out bool displayTimeInClientTimeZone);
 
         formComponent.Properties.DateOnly = dateOnly;
+        formComponent.Properties.DisplayTimeInClientTimeZone = displayTimeInClientTimeZone;
         formComponent.Properties.DefaultValue = defaultValue;
         formComponent.Properties.Is24HourFormat = is24HourFormat;
         formComponent.Properties.DateFormat = dateTimeFormat;

@@ -8,8 +8,11 @@
     var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
     var calendarId = Html.IdFor(m => m.SelectedDate);
     htmlAttributes["id"] = calendarId;
+    var timeZoneId = Html.IdFor(m => m.ClientOffsetToUtc);
 
     string altFormat = Model.Properties.DateFormat.Replace('M', 'm');
+    string defaultDate = "";
+
     if (!Model.Properties.DateOnly)
     {
         if (Model.Properties.Is24HourFormat)
@@ -21,6 +24,10 @@
             altFormat += " G:i K";
         }
     }
+    else
+    {
+        defaultDate = Model.SelectedDate.Split(' ').First();
+    }
 
     var flatpickrOptions = new
     {
@@ -29,7 +36,7 @@
         altFormat = altFormat,
         defaultDate = new List<string>
         {
-            Model.SelectedDate
+            defaultDate
         },
         enableTime = !Model.Properties.DateOnly,
         minuteIncrement = Model.Properties.TimeInterval,
@@ -38,6 +45,10 @@
 }
 
 @Html.TextBoxFor(m => m.SelectedDate, htmlAttributes)
+@{
+    htmlAttributes["id"] = timeZoneId;
+}
+@Html.HiddenFor(m => m.ClientOffsetToUtc, htmlAttributes)
 
 <script>
     async function fetchExcludedDateTimeData(dataProviderName) {
@@ -112,12 +123,36 @@
         let excludedDateTimeData = await fetchExcludedDateTimeData('@Model.Properties.ExcludedDateTimeDataProvider');
 
         let flatpickrOptions = @Html.Raw(Json.Serialize(flatpickrOptions));
+        let displayTimeInClientTimeZone = @Json.Serialize(Model.Properties.DisplayTimeInClientTimeZone);
+        let time = @Json.Serialize(Model.SelectedDate);
+        let dateOnly = @Json.Serialize(Model.Properties.DateOnly);
+        let timeZoneInput = document.getElementById("@timeZoneId");
 
         flatpickrOptions.disable = excludedDateTimeData.excludedDates.map((x) => new Date(x));
         flatpickrOptions.minTime = excludedDateTimeData.minTime;
         flatpickrOptions.maxTime = excludedDateTimeData.maxTime;
         flatpickrOptions.minDate = excludedDateTimeData.minDate;
         flatpickrOptions.maxDate = excludedDateTimeData.maxDate;
+
+        if (!dateOnly) {
+            var serverDate = new Date(time);
+
+            if (displayTimeInClientTimeZone) {
+                var serverOffset = serverDate.getTimezoneOffset() * 60000;
+                var clientOffset = (new Date().getTimezoneOffset()) * 60000;
+
+                var offsetDifference = serverOffset - clientOffset;
+                var displayDate = new Date(serverDate.getTime() + offsetDifference);
+                flatpickrOptions.defaultDate = [displayDate];
+
+                timeZoneInput.value = new Date().getTimezoneOffset();
+            } else {
+                flatpickrOptions.defaultDate = [serverDate];
+                timeZoneInput.value = serverDate.getTimezoneOffset();
+            }
+        } else {
+            timeZoneInput.value = new Date(time).getTimezoneOffset();
+        }
 
         let disabledDateTimes = excludedDateTimeData.excludedTimeFrames.map((x) => new Date(x));
         let onChange = [];
