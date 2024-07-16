@@ -9,6 +9,9 @@
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     </PropertyGroup>
 	<ItemGroup>
+	  <None Remove="C:\Users\asus\Desktop\Work\xperience\xperience-calendar-component\\README.md" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" />
     </ItemGroup>
 	<ItemGroup>
