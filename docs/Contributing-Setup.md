@@ -13,9 +13,23 @@ The requirements to setup, develop, and build this project are listed below.
 
 ### Node.js Runtime
 
-- [Node.js](https://nodejs.org/en/download) 18.12.0 or newer
+- [Node.js](https://nodejs.org/en/download) 20.11.0 or newer
 - [NVM for Windows](https://github.com/coreybutler/nvm-windows) to manage multiple installed versions of Node.js
 - See `engines` in the solution `package.json` for specific version requirements
+
+## Development environment setup
+
+1. Download/clone this repository.
+2. Run `npm run build` in the `/src/Kentico.Xperience.CalendarComponent/Client/`
+3. Create an instance of [Kentico Xperience 13 administration](https://docs.kentico.com/13/installation/installing-xperience).
+4. [Create a database](https://docs.kentico.com/13/installation/additional-database-installation).
+5. Start the DancingGoatCore site.
+6. Open `WebApp.sln` of your administration project.
+7. Start the *CMSApp* project in IIS Express.
+8. Go to the *Forms* application.
+9. Edit a form.
+10. Open Form builder and add the Calendar form component.
+11. Configure the properties of the component.
 
 ## Development Workflow
 
