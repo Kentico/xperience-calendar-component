@@ -20,8 +20,6 @@ Calendar form component integration enabling to add a calendar form component. T
 
 ### Dependencies
 
----These are all the dependencies required to use (not build) the library---
-
 - [ASP.NET Core 6.0](https://dotnet.microsoft.com/en-us/download)
 - [Kentico Xperience 13](https://docs.kentico.com/changelog)
 - [Flatpickr v4](https://flatpickr.js.org/)
