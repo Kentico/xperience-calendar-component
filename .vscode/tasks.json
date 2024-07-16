@@ -71,7 +71,7 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/src/Kentico.Xperience.CalendarComponent.Sample/DancingGoat.csproj"
+        "${workspaceFolder}/examples/DancingGoatCore/DancingGoatCore.csproj"
       ],
       "options": {
         "env": {

@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/Kentico.Xperience.CalendarComponent.Sample/bin/Debug/net6.0/DancingGoat.dll",
+      "program": "${workspaceFolder}/examples/DancingGoatCore/bin/Debug/net6.0/DancingGoatCore.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/Kentico.Xperience.CalendarComponent.Sample",
+      "cwd": "${workspaceFolder}/examples/DancingGoatCore",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
