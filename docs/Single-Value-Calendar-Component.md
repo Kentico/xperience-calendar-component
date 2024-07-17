@@ -16,4 +16,4 @@ offset is added to the selected time according to user's time zone.
 Time is always saved in the server's time zone.
 Only Date Time uses the offset. Date only does not convert the time.
 
-1. Excluded Date Time Data Provider - Here you can select the [Calendar dynamic data provider](./Dynamic-Calendar-Data-Provider.md).
+6. Excluded Date Time Data Provider - Here you can select the [Calendar dynamic data provider](./Dynamic-Calendar-Data-Provider.md).
