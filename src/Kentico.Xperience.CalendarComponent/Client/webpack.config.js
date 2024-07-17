@@ -7,7 +7,7 @@ const config = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, ".././wwwroot/js"),
-        filename: "ktc-calendarComponent.js",
+        filename: "@kentico/xperience-calendar-component.js",
         module: true,
     },
     experiments: {

@@ -25,7 +25,7 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Update="wwwroot\js\ktc-calendarComponent.js">
+	  <Content Update="wwwroot\js\@kentico/xperience-calendar-component.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
