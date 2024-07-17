@@ -1,7 +1,5 @@
 # Kentico Xperience 13 Calendar Form Component
 
----Select the correct badge for the support policy and update the GitHub Action pipeline badge to point to this repository (replace `repo-template`)---
-
 ## Description
 
 Calendar form component integration enabling to add a calendar form component. This integration allows for choice between seelcting a date, date and time or range of days, or multiple days. In addition it allows for simple programatic exclusion of excluded date and time values.
