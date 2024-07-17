@@ -1,6 +1,6 @@
 # Configure a single value Calendar form component
 
-![Component](../images/calendar-component-single-value.jpg)
+![Component](../images/calendar-component-single-value.png)
 
 The following properties are configurable in the kentico form builder:
 1. Show Date Only - Configures the calendar component to use date or date and time format.

@@ -16,7 +16,7 @@ Calendar form component integration enabling to add a calendar form component. T
 
 | Xperience Version | Library Version |
 | ----------------- | --------------- |
-| >= 28.1.0         | 1.0.0           |
+| >= 13.0.152       | 1.0.0           |
 
 ### Dependencies
 
@@ -29,7 +29,7 @@ Calendar form component integration enabling to add a calendar form component. T
 Add the package to your application using the .NET CLI
 
 ```powershell
-dotnet add package Kentico.Xperience.RepoTemplate
+dotnet add package Kentico.Xperience.CalendarComponent
 ```
 
 ## Quick Start
