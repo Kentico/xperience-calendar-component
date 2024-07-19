@@ -1,32 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-	<PropertyGroup>
-		<Product></Product>
-		<Title>$(Product)</Title>
-		<Description></Description>
-		<RepositoryUrl></RepositoryUrl>
-	</PropertyGroup>
-	<PropertyGroup>
-		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <PropertyGroup>
+        <Product></Product>
+        <Title>$(Product)</Title>
+        <Description></Description>
+        <RepositoryUrl></RepositoryUrl>
     </PropertyGroup>
-	<ItemGroup>
-	  <None Remove="C:\Users\asus\Desktop\Work\xperience\xperience-calendar-component\\README.md" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" />
+    <PropertyGroup>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Remove="C:\Users\asus\Desktop\Work\xperience\xperience-calendar-component\\README.md" />
     </ItemGroup>
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\js\" />
-	</ItemGroup>
-	<ItemGroup>
-		<AssemblyAttribute Include="CMS.AssemblyDiscoverableAttribute">
-		</AssemblyAttribute>
-	</ItemGroup>
-	<ItemGroup>
-	  <Content Update="wwwroot\js\@kentico/xperience-calendar-component.js">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" />
+    </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\js\" />
+    </ItemGroup>
+    <ItemGroup>
+        <AssemblyAttribute Include="CMS.AssemblyDiscoverableAttribute">
+        </AssemblyAttribute>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Update="wwwroot\js\@kentico/xperience-calendar-component.js">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 </Project>

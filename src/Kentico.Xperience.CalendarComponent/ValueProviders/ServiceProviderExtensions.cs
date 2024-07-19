@@ -15,7 +15,7 @@ internal static class ServiceProviderExtensions
     ///     This shouldn't normally occur because we fallback to <see cref="AbstractCalendarDataProvider" /> if not custom provider is specified.
     ///     However, incorrect dependency management in user-code could cause issues.
     /// </exception>
-    /// <returns></returns>
+    /// <returns>selected <see cref="ICalendarDataProvider"/></returns>
     public static ICalendarDataProvider GetRequiredCalendarDataProvider(this IServiceProvider serviceProvider, Type dataProviderType)
     {
         var dataProvider = serviceProvider.GetRequiredService(dataProviderType) as AbstractCalendarDataProvider;

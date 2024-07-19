@@ -38,7 +38,7 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
         Label = "Date Format",
         DefaultValue = "m.d.Y",
         ExplanationText = "Select Date format",
-        Order = 5)]
+        Order = 2)]
     [EditingComponentConfiguration(typeof(DateFormatConfigurator))]
     public string DateFormat { get; set; } = string.Empty;
 
@@ -48,14 +48,15 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Excluded Date Time Data Provider",
         DefaultValue = NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER,
-        ExplanationText = "Select a provider for excluded dates. Choose \"None\" for no provider.")]
+        ExplanationText = "Select a provider for excluded dates. Choose \"None\" for no provider.",
+        Order = 3)]
     [EditingComponentConfiguration(typeof(MultiCalendarExcludedDateTimeDataProviderConfigurator))]
     public string ExcludedDateTimeDataProvider { get; set; } = string.Empty;
 
     /// <summary>
     /// Sets the default value for calendar component.
     /// </summary>
-    [DefaultValueEditingComponent(MultiCalendarFormComponent.IDENTIFIER, Order = 10)]
+    [DefaultValueEditingComponent(MultiCalendarFormComponent.IDENTIFIER, Order = 4)]
     [EditingComponentConfiguration(typeof(MultiCalendarDefaultValueConfigurator), nameof(DateFormat))]
     public override string DefaultValue { get; set; } = string.Empty;
 }

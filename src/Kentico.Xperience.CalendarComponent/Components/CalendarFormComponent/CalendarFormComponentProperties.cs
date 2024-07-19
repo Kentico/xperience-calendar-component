@@ -28,7 +28,7 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
         Label = "Show Date Only",
         DefaultValue = false,
         ExplanationText = "Check for date-only selection. Displays date and time when unchecked",
-        Order = 2)]
+        Order = 1)]
     public bool DateOnly { get; set; }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
         Label = "Time Frame",
         DefaultValue = 15,
         ExplanationText = "Select number of minutes in each individual time frame",
-        Order = 3)]
+        Order = 2)]
     [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
     public int TimeInterval { get; set; }
 
@@ -49,7 +49,7 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
         Label = "Display in 24-Hour format",
         DefaultValue = false,
         ExplanationText = "Check for 24-Hour format, uses 12-Hour format by default.",
-        Order = 4)]
+        Order = 3)]
     [VisibilityCondition(nameof(DateOnly), ComparisonTypeEnum.IsFalse)]
     public bool Is24HourFormat { get; set; }
 
@@ -60,7 +60,7 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
         Label = "Date Format",
         DefaultValue = "M.d.Y",
         ExplanationText = "Select date format",
-        Order = 5)]
+        Order = 4)]
     [EditingComponentConfiguration(typeof(DateFormatConfigurator), nameof(DateOnly))]
     public string DateFormat { get; set; } = string.Empty;
 
@@ -70,14 +70,15 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     [EditingComponent(DropDownComponent.IDENTIFIER,
         Label = "Excluded Date Time Data Provider",
         DefaultValue = NO_EXCLUDED_DATETIME_DATA_PROVIDER_IDENTIFIER,
-        ExplanationText = "Select a provider for excluded date and time frames. Choose \"None\" option for no provider.")]
+        ExplanationText = "Select a provider for excluded date and time frames. Choose \"None\" option for no provider.",
+        Order = 5)]
     [EditingComponentConfiguration(typeof(CalendarExcludedDateTimeDataProviderConfigurator))]
     public string ExcludedDateTimeDataProvider { get; set; } = string.Empty;
 
     /// <summary>
     /// Sets the default value for calendar component.
     /// </summary>
-    [DefaultValueEditingComponent(CalendarFormComponent.IDENTIFIER, Order = 10)]
+    [DefaultValueEditingComponent(CalendarFormComponent.IDENTIFIER, Order = 6)]
     [EditingComponentConfiguration(typeof(CalendarDefaultValueConfigurator), nameof(DateFormat))]
     public override DateTime DefaultValue { get; set; } = DateTime.Now;
 
@@ -88,7 +89,7 @@ public class CalendarFormComponentProperties : FormComponentProperties<DateTime>
     /// Only Date Time uses the offset. Date only does not convert.
     /// </summary>
     [EditingComponent(CheckBoxComponent.IDENTIFIER,
-        Order = 11,
+        Order = 7,
         Label = "Display time in client's time zone",
         DefaultValue = true,
         ExplanationText = "Configures whether the value should be automatically shown in the client's time zone. If true, offset is added to the selected time according to user's time zone. Time is always saved in the server's time zone.")]

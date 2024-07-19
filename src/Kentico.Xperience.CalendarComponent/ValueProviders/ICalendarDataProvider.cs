@@ -8,37 +8,37 @@ public interface ICalendarDataProvider
     /// <summary>
     /// Disable dates for a calendar.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="IEnumerable{DateOnly}"/> with disabled date values</returns>
     Task<IEnumerable<DateOnly>> GetUnavailableDates();
 
     /// <summary>
     /// Disable DateTime values for a calendar.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="IEnumerable{DateTime}"/> with disabled date time values</returns>
     Task<IEnumerable<DateTime>> GetUnavailableTimeFrames();
 
     /// <summary>
     /// Set minimal time selectable in any day.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="TimeSpan"/> representing minimal selectable time in any day</returns>
     TimeSpan GetMinTime();
 
     /// <summary>
     /// Set maximal time selectable in any day.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="TimeSpan"/> representing maximual selectable time in any day</returns>
     TimeSpan GetMaxTime();
 
     /// <summary>
     /// Set minimal selectable Date.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="DateOnly"/> representing minimal selectable date</returns>
     DateOnly GetMinDate();
 
     /// <summary>
     /// Set maximal selectable Date.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="DateOnly"/> representing maximal selectable date</returns>
     DateOnly GetMaxDate();
 }
 

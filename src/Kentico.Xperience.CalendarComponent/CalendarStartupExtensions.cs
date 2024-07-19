@@ -14,6 +14,7 @@ public static class CalendarComponentStartipExtensions
     /// </summary>
     /// <param name="serviceCollection">The service collection.</param>
     /// <param name="configure">The application configuration.</param>
+    /// <returns>A reference to this instance after the operation has completed.</returns>
     public static IServiceCollection AddKenticoCalendarComponent(this IServiceCollection serviceCollection, Action<ICalendarComponentBuilder> configure)
     {
         var builder = new CalendarComponentBuilder(serviceCollection);
@@ -34,7 +35,7 @@ public interface ICalendarComponentBuilder
     /// <exception cref="ArgumentException">
     ///     Thrown if a provider has already been registered with the given <paramref name="providerName"/>
     /// </exception>
-    /// <returns></returns>
+    /// <returns>A reference to this <see cref="ICalendarComponentBuilder"/> instance after the operation has completed.</returns>
     ICalendarComponentBuilder RegisterDataProvider<TDataProvider>(string providerName) where TDataProvider : AbstractCalendarDataProvider;
 }
 

@@ -15,7 +15,7 @@ public sealed class CalendarDataProviderController : Controller
     /// Returns data from dynamic data provider for a given calendar form component.
     /// </summary>
     /// <param name="dataProviderName">name of the provider</param>
-    /// <returns></returns>
+    /// <returns><see cref="JsonResult"/> containing data from dynamic data provider</returns>
     /// <exception cref="InvalidDataException"></exception>
     [HttpGet]
     public async Task<IActionResult> GetExcludedDateTimeData(string dataProviderName)
