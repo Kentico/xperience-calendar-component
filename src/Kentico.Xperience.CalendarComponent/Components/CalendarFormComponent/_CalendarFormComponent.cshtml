@@ -1,0 +1,73 @@
+@using Kentico.Xperience.CalendarComponent.Components
+@using Kentico.Forms.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model CalendarFormComponent
+
+@{
+    var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
+    var calendarId = Html.IdFor(m => m.SelectedDate);
+    htmlAttributes["id"] = calendarId;
+    var timeZoneId = Html.IdFor(m => m.ClientOffsetToUtc);
+
+    string altFormat = Model.Properties.DateFormat.Replace('M', 'm');
+    string defaultDate = "";
+
+    if (!Model.Properties.DateOnly)
+    {
+        if (Model.Properties.Is24HourFormat)
+        {
+            altFormat += " H:i";
+        }
+        else
+        {
+            altFormat += " G:i K";
+        }
+    }
+    else
+    {
+        defaultDate = Model.SelectedDate.Split(' ').First();
+    }
+
+    var flatpickrOptions = new
+    {
+        dateFormat = "m/d/Y h:i:S K",
+        altInput = true,
+        altFormat = altFormat,
+        defaultDate = new List<string>
+        {
+            defaultDate
+        },
+        enableTime = !Model.Properties.DateOnly,
+        minuteIncrement = Model.Properties.TimeInterval,
+        time_24hr = Model.Properties.Is24HourFormat
+    };
+
+    var configuration = new
+    {
+        provider = Model.Properties.ExcludedDateTimeDataProvider,
+        displayDateTimeInClientTimeZone = Model.Properties.DisplayTimeInClientTimeZone,
+        flatpickrOptions = flatpickrOptions,
+        timeZoneId = timeZoneId,
+        calendarId = calendarId,
+        dateOnly = Model.Properties.DateOnly,
+        timeZoneInputId = timeZoneId,
+        selectedDate = Model.SelectedDate
+    };
+}
+
+@Html.TextBoxFor(m => m.SelectedDate, htmlAttributes)
+@{
+    htmlAttributes["id"] = timeZoneId;
+}
+@Html.HiddenFor(m => m.ClientOffsetToUtc, htmlAttributes)
+
+<script>
+    var script = document.createElement('script');
+    script.src = "~/_content/Kentico.Xperience.CalendarComponent/js/xperience-calendar-component.js";
+    script.onload = async function () {
+
+        await xperience.calendarComponent.initializeFlatpickrSingleInput(@Html.Raw(Json.Serialize(configuration)));
+    };
+    document.head.appendChild(script);
+</script>

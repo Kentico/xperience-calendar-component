@@ -1,0 +1,48 @@
+@using Kentico.Xperience.CalendarComponent.Components
+@using Kentico.Forms.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model MultiCalendarFormComponent
+
+@{
+    var htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
+    var calendarId = Html.IdFor(m => m.SelectedValue);
+    htmlAttributes["id"] = calendarId;
+
+    List<string> defaultDate = new List<string>();
+    if (!string.IsNullOrEmpty(Model.SelectedValue))
+    {
+        defaultDate = Model.SelectedValue.Split(';').ToList();
+        if (!Model.Properties.IsMulti)
+        {
+            defaultDate = defaultDate.Take(2).ToList();
+        }
+    }
+
+    var flatpickrOptions = new
+    {
+        dateFormat = "m/d/Y",
+        altInput = true,
+        altFormat = Model.Properties.DateFormat.Replace('M', 'm'),
+        defaultDate = defaultDate,
+        mode = Model.Properties.IsMulti ? "multiple" : "range"
+    };
+
+    var configuration = new
+    {
+        provider = Model.Properties.ExcludedDateTimeDataProvider,
+        flatpickrOptions = flatpickrOptions,
+        calendarId = calendarId
+    };
+}
+
+@Html.TextBoxFor(m => m.SelectedValue, htmlAttributes)
+
+<script>
+    var script = document.createElement('script');
+    script.src = "~/_content/Kentico.Xperience.CalendarComponent/js/xperience-calendar-component.js";
+    script.onload = function () {
+        window.xperience.calendarComponent.initializeFlatpickrMultiInput(@Html.Raw(Json.Serialize(configuration)));
+    };
+    document.head.appendChild(script);
+</script>
