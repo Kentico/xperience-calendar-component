@@ -11,13 +11,13 @@
 
     <PackageProjectUrl>https://github.com/Kentico/xperience-calendar-component</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/Kentico/xperience-calendar-component/releases</PackageReleaseNotes>
-    <PackageIcon>icon.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>xperience;kentico;aspnetcore</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)\images\icon.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)\images\logo.png" Pack="true" Visible="false" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 
@@ -31,6 +31,8 @@
     <CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
     <NoWarn>$(NoWarn);1591;S3267</NoWarn>
     <RootNamespace>Kentico.Xperience.CalendarComponent</RootNamespace>
+
+    <TimestampServerUrl>http://timestamp.digicert.com</TimestampServerUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" $(Configuration) == 'Release' ">
