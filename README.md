@@ -2,13 +2,13 @@
 
 ## Description
 
-Calendar form component integration enabling to add a calendar form component. This integration allows for choice between seelcting a date, date and time or range of days, or multiple days. In addition it allows for simple programatic exclusion of excluded date and time values.
+Calendar form component integration enabling to add a calendar form component. This integration allows you to select a date, date and time, range of days, or multiple days. It also provides a simple programmatic exclusion of the excluded date and time values.
 
 ## Screenshots
 
 ![Form builder UI calendar form component configuration](./images/calendar-component-form-builder.png)
 ![Calendar single value form component configuration](./images/calendar-component-single-value.png)
-![Calendar multi value form component configuration](./images/calendar-component-multi-value.png)
+![Calendar multi-value form component configuration](./images/calendar-component-multi-value.png)
 
 ## Library Version Matrix
 
@@ -32,15 +32,15 @@ dotnet add package Kentico.Xperience.CalendarComponent
 
 ## Quick Start
 
-1. In the administration head to Forms and create or edit a form.
-2. In the Form Builder add a new form component and select Calendar or Multi calendar.
+1. In the administration, head to Forms and create or edit a form.
+2. In the Form builder, add a new form component and select Calendar or Multi-Calendar
 3. Configure the Properties of your selected calendar form component.
-4. View the [Single Value Calendar Guide](./docs/Single-Value-Calendar-Component.md) or the [Multi Value Calendar Guide](./docs/Multi-Value-Calendar-Component.md) for more information about each component's properties.
-5. Optionally create and add a dynamic calendar data provider. View more about the provider in the [Dynamic Data Provider](./docs/Dynamic-Calendar-Data-Provider.md)
+4. View the [Single Value Calendar Guide](./docs/Single-Value-Calendar-Component.md) or the [Multi-Value Calendar Guide](./docs/Multi-Value-Calendar-Component.md) for more information about each component's properties.
+5. Optionally, create and add a dynamic calendar data provider. View more about the provider in the [Dynamic Data Provider](./docs/Dynamic-Calendar-Data-Provider.md)
 
 ## Full Instructions
 
-View how to configure the [Single Value Calendar](./docs/Single-Value-Calendar-Component.md) or the [Multi Value Calendar](./docs/Multi-Value-Calendar-Component.md).
+View how to configure the [Single Value Calendar](./docs/Single-Value-Calendar-Component.md) or the [Multi-Value Calendar](./docs/Multi-Value-Calendar-Component.md).
 
 View the [Usage Guide](./docs/Usage-Guide.md) for more detailed instructions.
 

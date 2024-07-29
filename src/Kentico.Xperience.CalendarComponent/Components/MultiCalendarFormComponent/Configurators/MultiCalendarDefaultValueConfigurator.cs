@@ -8,12 +8,12 @@ internal class MultiCalendarDefaultValueConfigurator : FormComponentConfigurator
     {
         formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.DateFormat), out string dateTimeFormat);
         formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.ExcludedDateTimeDataProvider), out string dateTimeDataProvider);
-        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.IsMulti), out bool isMulti);
+        formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.IsMultiDate), out bool isMulti);
         formFieldValueProvider.TryGet(nameof(MultiCalendarFormComponentProperties.DefaultValue), out string defaultValue);
 
         formComponent.Properties.DateFormat = dateTimeFormat;
         formComponent.Properties.DefaultValue = defaultValue;
-        formComponent.Properties.IsMulti = isMulti;
+        formComponent.Properties.IsMultiDate = isMulti;
         formComponent.Properties.ExcludedDateTimeDataProvider = dateTimeDataProvider;
     }
 }

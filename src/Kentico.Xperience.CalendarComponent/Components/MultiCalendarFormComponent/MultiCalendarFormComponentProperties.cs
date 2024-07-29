@@ -25,11 +25,11 @@ public class MultiCalendarFormComponentProperties : FormComponentProperties<stri
     /// Configures whether the component should set multiple dates or a range of dates.
     /// </summary>
     [EditingComponent(CheckBoxComponent.IDENTIFIER,
-        Label = "Is multi date selection",
+        Label = "Is Multi-Date Selection",
         DefaultValue = false,
-        ExplanationText = "Check for multi value selection. Uncheck for Range selection.",
+        ExplanationText = "Check for multi-value selection. Uncheck for Range selection.",
         Order = 1)]
-    public bool IsMulti { get; set; }
+    public bool IsMultiDate { get; set; }
 
     /// <summary>
     /// Configures displayed date format.

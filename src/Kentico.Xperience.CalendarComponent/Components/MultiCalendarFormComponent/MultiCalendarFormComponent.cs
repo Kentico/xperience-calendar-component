@@ -6,7 +6,7 @@ using Kentico.Xperience.CalendarComponent.Components;
 [assembly: RegisterFormComponent(
     identifier: MultiCalendarFormComponent.IDENTIFIER,
     formComponentType: typeof(MultiCalendarFormComponent),
-    name: "Multi Calendar",
+    name: "Multi-Value Calendar",
     Description = "Pick date range from calendar",
     IconClass = "icon-calendar",
     ViewName = "~/Components/MultiCalendarFormComponent/_MultiCalendarFormComponent.cshtml")]

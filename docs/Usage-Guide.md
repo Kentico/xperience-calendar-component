@@ -6,11 +6,11 @@ Below are the steps to integrate the library into your solution.
 
 ## Single value calendar component
 
-See [Single value calendar component](Single-Value-Calendar-Component.md) to use the calendar as a single value configurable date-time picker.
+See [Single value calendar component](Single-Value-Calendar-Component.md) to use the calendar as a single value configurable Date Time picker.
 
-## Multi value calendar component
+## Multi-value calendar component
 
-See [Multi value calendar component](Multi-Value-Calendar-Component.md) to use the calendar as a date picker of multiple values or range of dates.
+See [Multi-value calendar component](Multi-Value-Calendar-Component.md) to use the calendar as a date picker of multiple values or range of dates.
 
 ## Dynamic calendar data provider
 
