@@ -3,6 +3,9 @@
 ![Component](../images/calendar-component-single-value.png)
 
 The following properties are configurable in the Kentico Form builder:
+
+![Form builder UI calendar form component configuration](../images/calendar-component-form-builder.png)
+
 1. Show Date Only - Configures the calendar component to use date or date and time format.
 
 2. Time Frame - Sets the number of minutes of each time interval selectable via the time setting arrows.

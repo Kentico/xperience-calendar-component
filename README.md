@@ -4,12 +4,6 @@
 
 Calendar form component integration enabling to add a calendar form component. This integration allows you to select a date, date and time, range of days, or multiple days. It also provides a simple programmatic exclusion of the excluded date and time values.
 
-## Screenshots
-
-![Form builder UI calendar form component configuration](./images/calendar-component-form-builder.png)
-![Calendar single value form component configuration](./images/calendar-component-single-value.png)
-![Calendar multi-value form component configuration](./images/calendar-component-multi-value.png)
-
 ## Library Version Matrix
 
 | Xperience Version | Library Version |
@@ -24,7 +18,7 @@ Calendar form component integration enabling to add a calendar form component. T
 
 ## Package Installation
 
-Add the package to your application using the .NET CLI
+Add the package to your application using the .NET CLI.
 
 ```powershell
 dotnet add package Kentico.Xperience.CalendarComponent
@@ -33,10 +27,10 @@ dotnet add package Kentico.Xperience.CalendarComponent
 ## Quick Start
 
 1. In the administration, head to Forms and create or edit a form.
-2. In the Form builder, add a new form component and select Calendar or Multi-Calendar
+2. In the Form builder, add a new form component and select Calendar or Multi-Calendar.
 3. Configure the Properties of your selected calendar form component.
 4. View the [Single Value Calendar Guide](./docs/Single-Value-Calendar-Component.md) or the [Multi-Value Calendar Guide](./docs/Multi-Value-Calendar-Component.md) for more information about each component's properties.
-5. Optionally, create and add a dynamic calendar data provider. View more about the provider in the [Dynamic Data Provider](./docs/Dynamic-Calendar-Data-Provider.md)
+5. Optionally, create and add a dynamic calendar data provider. View more about the provider in the [Dynamic Data Provider](./docs/Dynamic-Calendar-Data-Provider.md).
 
 ## Full Instructions
 
